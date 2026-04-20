@@ -1,0 +1,87 @@
+#!/bin/bash
+
+echo "fuck off , shit"
+
+cur_dir="$(dirname "${BASH_SOURCE[0]}")/runner_tool"
+
+echo $cur_dir
+if [ -z "$1" ]; then
+	echo -e "\033[0;31mTERMINATED\033[0m"
+	echo "give arguments please..."
+	echo "Usage: ./executer <filename>.cpp"
+    	exit 1
+fi
+
+len1=${#1}
+if [ "$len1" -lt 5 ];then
+	echo -e "\033[0;31mNOT EXECUTING , give correct filename\033[0m"
+	exit 1
+fi
+
+FILE="$1"
+TILL=$(($len1-4))
+FILENAME="${FILE:0:$TILL}"
+len2=${#FILENAME}
+#echo $FILENAME
+EXTENSION="${FILE:$((len2)):len1}"
+
+#echo $EXTENSION
+
+if [ $EXTENSION != ".cpp" ];then
+	echo -e "\033[0;31mIncorrect extention\033[0m"
+	echo "your extension was $EXTENSION but this program only works for .cpp"
+	exit 1
+fi
+
+# populating data in input2.txt
+if [ $# -gt 1 ]; then
+	argu=" "
+	for ((i=1; i<=$#; i++))
+	do
+    	#echo "${!i}"
+		if [ $i -ne 1 ];then
+		argu+=" ${!i}"
+		fi
+	done
+	python3 $cur_dir/scripts/selective_tc.py $argu >  $cur_dir/temp_test_file/input2.txt
+	python3 $cur_dir/scripts/selective_output.py $argu >  $cur_dir/temp_test_file/expected_output2.txt
+else
+	cp $cur_dir/input.txt  $cur_dir/temp_test_file/input2.txt
+	cp $cur_dir/expected_output.txt  $cur_dir/temp_test_file/expected_output2.txt
+fi
+
+rm -rf $cur_dir/temp_test_file/tc_seperated/*
+python3 $cur_dir/scripts/splitter.py
+
+t=0
+g++ $FILE -o $cur_dir/temp_test_file/temp.exe
+echo "created executable"
+
+truncate -s 0 $cur_dir/output.txt
+for tem in $cur_dir/temp_test_file/tc_seperated/* ; do
+	if [ $t -ne 0 ] ; then
+		echo  >> $cur_dir/output.txt
+	fi
+	
+	"$cur_dir/temp_test_file/temp.exe" < $tem >> $cur_dir/output.txt
+	"$cur_dir/temp_test_file/temp.exe" < $tem
+	echo "output appended"
+	((t++))
+done
+
+rm  $cur_dir/temp_test_file/temp.exe
+echo "removed temp.exe"
+
+python3  $cur_dir/scripts/compare_tc.py
+
+
+# added basic checker for file extension till now only
+# if 1 argument only then just copy input file to input2 else tex.py from old project 
+# will get the necesarry test cases in input2 (tex was printing without new line ,
+# but print with new line, modification needed in tex )
+
+ 
+#	
+#    
+#    
+#    2prdr
