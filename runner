@@ -64,13 +64,14 @@ for tem in $cur_dir/temp_test_file/tc_seperated/* ; do
 	fi
 	
 	"$cur_dir/temp_test_file/temp.exe" < $tem >> $cur_dir/output.txt
-	"$cur_dir/temp_test_file/temp.exe" < $tem
+	#"$cur_dir/temp_test_file/temp.exe" < $tem 
 	echo "output appended"
 	((t++))
 done
 
 rm  $cur_dir/temp_test_file/temp.exe
 echo "removed temp.exe"
+#cat $cur_dir/output.txt
 
 python3  $cur_dir/scripts/compare_tc.py
 

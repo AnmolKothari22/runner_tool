@@ -8,28 +8,33 @@ def read_testcases(filename):
         content = f.read().strip()
 
     # Split on blank lines
-    testcases = content.split("\n\n")
-
+    og_testcases = content.split("\n\n")
     # Normalize each testcase (remove trailing spaces, etc.)
     testcases = [
         "\n".join(line.strip() for line in tc.strip().split("\n"))
-        for tc in testcases
+        for tc in og_testcases
     ]
 
-    return testcases
+    return testcases,og_testcases
 
 
-expected = read_testcases(EX_OUTPUT_PATH)
-output = read_testcases(EX_OUTPUT2_PATH)
+expected,og_expected = read_testcases(EX_OUTPUT_PATH)
+output,og_output = read_testcases(EX_OUTPUT2_PATH)
+
 
 # Compare
+print("----------------------------------------")
 for i, (exp, out) in enumerate(zip(expected, output), 1):
     if exp != out:
         print(f"\033[91m Testcase {i} failed\033[0m")
-        print(expected)
-        print(output)
     else:
         print(f"\033[92m Testcase {i} passed\033[0m")
+    print(f"\033[93m expected: \033[0m")
+    print(og_expected[i-1])
+    print(f"\033[93m output: \033[0m")
+    print(og_output[i-1])
+
+    print("----------------------------------------")
 
 # Extra safety checks
 if len(expected) != len(output):
