@@ -3,8 +3,8 @@ import os
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 INPUT_PATH = os.path.join(SCRIPT_DIR, "../temp_test_file/input2.txt")
 INPUT_PATH_SPLIT = os.path.join(SCRIPT_DIR, "../temp_test_file/tc_seperated")
-print(INPUT_PATH)
-print(INPUT_PATH_SPLIT)
+#print(INPUT_PATH)
+#print(INPUT_PATH_SPLIT)
 
 
 try:

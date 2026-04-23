@@ -1,10 +1,9 @@
 #!/bin/bash
 
-echo "fuck off , shit"
 
 cur_dir="$(dirname "${BASH_SOURCE[0]}")/runner_tool"
 
-echo $cur_dir
+#echo $cur_dir
 if [ -z "$1" ]; then
 	echo -e "\033[0;31mTERMINATED\033[0m"
 	echo "give arguments please..."
@@ -56,25 +55,29 @@ python3 $cur_dir/scripts/splitter.py
 t=0
 g++ $FILE -o $cur_dir/temp_test_file/temp.exe
 echo "created executable"
-
+total_time=0
 truncate -s 0 $cur_dir/output.txt
 for tem in $cur_dir/temp_test_file/tc_seperated/* ; do
 	if [ $t -ne 0 ] ; then
 		echo  >> $cur_dir/output.txt
 	fi
-	
+	start=$(date +%s%N)
 	"$cur_dir/temp_test_file/temp.exe" < $tem >> $cur_dir/output.txt
+	end=$(date +%s%N)
+	duration=$((end - start))
+    total_time=$((total_time + duration))
 	#"$cur_dir/temp_test_file/temp.exe" < $tem 
 	echo "output appended"
 	((t++))
 done
 
 rm  $cur_dir/temp_test_file/temp.exe
-echo "removed temp.exe"
+#echo "removed temp.exe"
 #cat $cur_dir/output.txt
 
 python3  $cur_dir/scripts/compare_tc.py
-
+((total_time = total_time/1000000))
+echo "Total time: $total_time milliseconds"
 
 # added basic checker for file extension till now only
 # if 1 argument only then just copy input file to input2 else tex.py from old project 
