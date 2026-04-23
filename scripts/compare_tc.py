@@ -18,23 +18,28 @@ def read_testcases(filename):
     return testcases,og_testcases
 
 
-expected,og_expected = read_testcases(EX_OUTPUT_PATH)
-output,og_output = read_testcases(EX_OUTPUT2_PATH)
+expected,og_expected = read_testcases(EX_OUTPUT2_PATH)
+output,og_output = read_testcases(EX_OUTPUT_PATH)
 
 
 # Compare
+fl=1
 print("----------------------------------------")
 for i, (exp, out) in enumerate(zip(expected, output), 1):
     if exp != out:
-        print(f"\033[91m Testcase {i} failed\033[0m")
+        print(f"\033[91mTestcase {i} failed\033[0m")
+        fl=0
     else:
-        print(f"\033[92m Testcase {i} passed\033[0m")
+        print(f"\033[92mTestcase {i} passed\033[0m")
     print(f"\033[93m expected: \033[0m")
     print(og_expected[i-1])
     print(f"\033[93m output: \033[0m")
     print(og_output[i-1])
 
     print("----------------------------------------")
+if fl==1:
+    #print(f"\033[92m All testcases passed\033[0m")
+    print("\033[42;37mAll testcases passed\033[0m")
 
 # Extra safety checks
 if len(expected) != len(output):
