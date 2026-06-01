@@ -29,8 +29,9 @@ try:
                 file_no=file_no+1
                 temp="1\n"
             co=co+1
-        padded_file_no=((5-len(str(file_no)))*"0")
+        padded_file_no=str((5-len(str(file_no)))*"0")+str(file_no)
         file_name="tc"+padded_file_no+".txt"
+        print("file no: "+file_no+" prossesed")
         FILE_TEMP_PATH= os.path.join(INPUT_PATH_SPLIT,file_name)
         with open(FILE_TEMP_PATH, "w", encoding="utf-8") as tc:
             tc.write(temp)
