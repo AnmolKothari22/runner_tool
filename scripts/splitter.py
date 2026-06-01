@@ -20,10 +20,11 @@ try:
               #  print("the line: ",len(line),line)
                 temp=temp+line
             else:
-                file_name="tc"+str(file_no)+".txt"
+                padded_file_no=str((5-len(str(file_no)))*"0")+str(file_no)
+                file_name="tc"+padded_file_no+".txt"
+              
                 FILE_TEMP_PATH= os.path.join(INPUT_PATH_SPLIT,file_name)
-                #print(temp)
-                #print(FILE_TEMP_PATH)
+        
                 with open(FILE_TEMP_PATH, "w", encoding="utf-8") as tc:
                     tc.write(temp)
                 file_no=file_no+1
@@ -31,7 +32,7 @@ try:
             co=co+1
         padded_file_no=str((5-len(str(file_no)))*"0")+str(file_no)
         file_name="tc"+padded_file_no+".txt"
-        print("file no: "+file_no+" prossesed")
+      
         FILE_TEMP_PATH= os.path.join(INPUT_PATH_SPLIT,file_name)
         with open(FILE_TEMP_PATH, "w", encoding="utf-8") as tc:
             tc.write(temp)
