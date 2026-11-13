@@ -6,5 +6,6 @@
     1: Linux/WSL
     2: python
     
-
+### command to run
+    1: runner ./{filename}.cpp
 
