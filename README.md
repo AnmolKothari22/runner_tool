@@ -26,12 +26,14 @@
     ls -l /usr/local/bin/runner
     ls -ld /usr/local/bin/runner_tool
 
-    
+#### 6. making temp file folder
+    mkdir /usr/local/bin/runner_tool/temp_test_file/tc_seperated
+
 ## Running process
-    1: open /usr/local/bin/runner_tool/input.txt for inputting test cases
-    2: open /usr/local/bin/runner_tool/expected_output.txt for expected outputs
-    3: keep only **ONE** line empty in between testcases and expected output both 
-    3: command to run :
+#### 1: open **/usr/local/bin/runner_tool/input.txt** for inputting test cases 
+#### 2: open **/usr/local/bin/runner_tool/expected_output.txt** for expected outputs 
+#### 3: keep only **ONE** line empty in between testcases and expected output both 
+#### 4: command to run :
 ```bash
     runner {PATH of cpp file}
 ```
