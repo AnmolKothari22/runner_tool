@@ -51,5 +51,5 @@
 ```
 
 ## Example setup:
-![example setup image](runner_eg.png)
+![example setup image](images/runner_eg.png)
 
