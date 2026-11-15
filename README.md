@@ -11,23 +11,35 @@
 ## Installation steps
 
 #### 1. Clone the repo
+```bash
     git clone https://github.com/AnmolKothari22/runner_tool && cd runner_tool
+```
 
 #### 2. Copy runner to binaries
+```bash
     sudo cp runner /usr/local/bin/
+```
 
 #### 3. Copy runner_tool to binaries
+```bash
     sudo cp runner_tool /usr/local/bin/
+```
 
 #### 4. Make runner executable
+```bash
     sudo chmod +x /usr/local/bin/runner
+```
 
 #### 5. Verify installation
+```bash
     ls -l /usr/local/bin/runner
     ls -ld /usr/local/bin/runner_tool
+```
 
 #### 6. making temp file folder
+```bash
     mkdir /usr/local/bin/runner_tool/temp_test_file/tc_seperated
+```
 
 ## Running process
 #### 1: open **/usr/local/bin/runner_tool/input.txt** for inputting test cases 
@@ -38,4 +50,6 @@
     runner {PATH of cpp file}
 ```
 
+## Example setup:
+![example setup image](runner_eg.png)
 
